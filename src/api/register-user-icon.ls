@@ -7,12 +7,13 @@ require! {
 module.exports = (req, res) ->
 	passkey = req.body['passkey']
 	image-name = req.body['image-name']
+	user-id = req.body['user-id']
 	if passkey == config.passkey
 		if (Object.keys req.files).length == 1 =>
 			path = req.files.image.path
 			image = fs.read-file-sync path
 			fs.unlink path
-			save-file "user/icon/#{image-name}" image .then do
+			save-file "user-contents/user/#user-id/icon/#image-name" image .then do
 				->
 					res.status 200
 					res.send!
