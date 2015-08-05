@@ -7,6 +7,7 @@ module.exports = (req, res) ->
 	passkey = req.body['passkey']
 	image-name = req.body['image-name']
 	console.log req.body['image-name']
+	console.log req.body['image']
 	if passkey == config.passkey
 		console.log (Object.keys req.files).length
 		if (Object.keys req.files).length == 1 =>
