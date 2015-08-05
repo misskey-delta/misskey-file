@@ -1,0 +1,42 @@
+{
+  "name": "misskey-image",
+  "description": "Misskey Image Server",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/syuilo/Misskey-Image.git",
+  "bugs": "http://github.com/syuilo/Misskey-Image/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syuilo/Misskey-Image.git"
+  },
+  "main": "./",
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp test",
+    "watch": "gulp watch"
+  },
+  "dependencies": {
+    "express": "4.13.1",
+    "gm": "1.18.1",
+	"http2": "3.2.0",
+    "jade": "1.11.0",
+    "multer": "0.1.8",
+    "prelude-ls": "1.1.2",
+    "livescript": "1.4.0",
+    "gulp": "3.9.0",
+    "gulp-livescript": "2.4.0"
+  },
+  "author": {
+    "name": "syuilo",
+    "email": "syuilotan@yahoo.co.jp",
+    "url": "https://github.com/syuilo"
+  },
+  "contributors": [
+    {
+      "name": "syuilo",
+      "email": "syuilotan@yahoo.co.jp",
+      "url": "https://github.com/syuilo"
+    }
+  ]
+}

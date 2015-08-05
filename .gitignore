@@ -1,0 +1,16 @@
+# npm
+npm-debug.log
+/node_modules/
+
+# Built
+/lib/
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Other
+/resource-projects/
+/certs/
