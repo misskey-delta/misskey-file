@@ -13,9 +13,13 @@ module.exports = (req, res) ->
 			image = fs.read-file-sync path
 			#fs.unlink path
 			console.log path
-			save-file "status/#{image-name}" image .then ->
-				res.status 200
-				res.send!
+			save-file "status/#{image-name}" image .then do
+				() ->
+					res.status 200
+					res.send!
+				(err) ->
+					res.status 500
+					res.send!
 		else
 			res.status 400
 			res.send!
