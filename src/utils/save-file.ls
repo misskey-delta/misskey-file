@@ -10,7 +10,7 @@ module.exports = (save-path, image-data) ->
 	
 	resolved-save-path = "/usr/share/nginx/html/contents/#save-path"
 
-	mkdirp path.dirname resolved-save-path, (err) ->
+	mkdirp (path.dirname resolved-save-path), (err) ->
 		fs.write-file resolved-save-path, image-data, (err) ->
 			if err
 				console.log err
