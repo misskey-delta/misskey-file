@@ -1,6 +1,7 @@
 require! {
+	fs
 	'../config'
-	'../utils/save-file'
+	'../utils/save-file': save-file
 }
 
 module.exports = (req, res) ->
@@ -10,9 +11,14 @@ module.exports = (req, res) ->
 		if (Object.keys req.files).length == 1 =>
 			path = req.files.image.path
 			image = fs.read-file-sync path
-			save-file "user/icon/#{image-name}" image .then ->
-				res.status 200
-				res.send!
+			fs.unlink path
+			save-file "user/icon/#{image-name}" image .then do
+				->
+					res.status 200
+					res.send!
+				(err) ->
+					res.status 500
+					res.send!
 		else
 			res.status 400
 			res.send!
