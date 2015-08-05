@@ -7,6 +7,7 @@ require! {
 	https
 	express
 	jade
+	multer
 	'body-parser'
 	'./config'
 }
@@ -15,6 +16,7 @@ require! {
 app = express!
 app.disable \x-powered-by
 app.use body-parser.urlencoded {+extended}
+app.use multer!
 
 app.all '*' (req, res, next) ->
 	console.log 'kyoppie'
