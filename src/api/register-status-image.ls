@@ -11,8 +11,7 @@ module.exports = (req, res) ->
 		if (Object.keys req.files).length == 1 =>
 			path = req.files.image.path
 			image = fs.read-file-sync path
-			#fs.unlink path
-			console.log path
+			fs.unlink path
 			save-file "status/#{image-name}" image .then do
 				->
 					res.status 200
