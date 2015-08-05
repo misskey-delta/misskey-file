@@ -7,12 +7,14 @@ require! {
 	https
 	express
 	jade
+	'body-parser'
 	'./config'
 }
 
 # Init express
 app = express!
 app.disable \x-powered-by
+app.use body-parser.urlencoded {+extended}
 
 app.all '*' (req, res, next) ->
 	console.log 'kyoppie'

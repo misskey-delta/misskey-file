@@ -17,6 +17,7 @@
     "watch": "gulp watch"
   },
   "dependencies": {
+	"body-parser": "1.13.2",
     "express": "4.13.1",
     "gm": "1.18.1",
 	"http2": "3.2.0",
