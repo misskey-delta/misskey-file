@@ -4,13 +4,13 @@ require! {
 	'../config'
 }
 
-module.exports = (path, image-data) ->
+module.exports = (save-path, image-data) ->
 	resolve, reject <- new Promise!
 	
-	image-path = path.resolve "#__dirname/../../../../images/#path"
+	save-path = path.resolve "#__dirname/../../../../images/#save-path"
 	console.log image-path
 
-	fs.write-file image-path, data, (err) ->
+	fs.write-file save-path, data, (err) ->
 		if err
 			console.log err
 			reject err
