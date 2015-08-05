@@ -6,7 +6,7 @@ require! {
 module.exports = (req, res) ->
 	passkey = req.body['passkey']
 	image-name = req.body['image-name']
-	if passkey == config.passkey]
+	if passkey == config.passkey
 		if (Object.keys req.files).length == 1 =>
 			path = req.files.image.path
 			image = fs.read-file-sync path
