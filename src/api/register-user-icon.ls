@@ -1,6 +1,6 @@
 require! {
 	'../config'
-	'../utils/save-file': save-file
+	'../utils/save-file'
 }
 
 module.exports = (req, res) ->
