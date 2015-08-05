@@ -1,5 +1,4 @@
 require! {
-	path
 	fs
 	'../config'
 }
@@ -7,7 +6,7 @@ require! {
 module.exports = (save-path, image-data) ->
 	resolve, reject <- new Promise!
 	
-	resolved-save-path = path.resolve "#__dirname/../../../../images/#save-path"
+	resolved-save-path = "/usr/share/nginx/html/contents/#save-path"
 
 	fs.write-file resolved-save-path, image-data, (err) ->
 		if err
