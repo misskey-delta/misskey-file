@@ -8,6 +8,7 @@ Source code of Misskey core server has also been published: [syuilo/Misskey](htt
 
 ## Dependencies
 [![Node.js](https://img.shields.io/badge/Node.js-0.12.0-blue.svg)](https://nodejs.org)
+[![nginx](https://img.shields.io/badge/nginx-1.8.0-blue.svg)](http://nginx.org)
 
 ## Contribution
 We welcome your contributions.
