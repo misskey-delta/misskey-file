@@ -14,7 +14,7 @@ module.exports = (req, res) ->
 			#fs.unlink path
 			console.log path
 			save-file "status/#{image-name}" image .then do
-				() ->
+				->
 					res.status 200
 					res.send!
 				(err) ->
