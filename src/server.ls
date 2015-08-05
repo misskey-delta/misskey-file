@@ -13,7 +13,10 @@ require! {
 # Init express
 app = express!
 app.disable \x-powered-by
-app.all '*' (req, res, next) ->
-	console.log 'kyoppie'
+
+app.get '/' (req, res) ->
 	res.send 'kyoppie'
-app.listen 80
+
+app.post '/register-user-icon' (req, res) -> (require './api/register-user-icon') req, res
+
+app.listen config.port
