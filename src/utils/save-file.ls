@@ -7,5 +7,8 @@ module.exports = (path, image-data) ->
 	resolve, reject <- new Promise!
 
 	fs.write-file "#__dirname/../../../../images/#path" data (err) ->
-		if err then throw err
-		resolve!
+		if err
+			console.log err
+			reject err
+		else
+			resolve!
