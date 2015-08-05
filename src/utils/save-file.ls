@@ -7,10 +7,10 @@ require! {
 module.exports = (save-path, image-data) ->
 	resolve, reject <- new Promise!
 	
-	save-path = path.resolve "#__dirname/../../../../images/#save-path"
-	console.log image-path
+	resolved-save-path = path.resolve "#__dirname/../../../../images/#save-path"
+	console.log resolved-save-path
 
-	fs.write-file save-path, data, (err) ->
+	fs.write-file resolved-save-path, data, (err) ->
 		if err
 			console.log err
 			reject err
