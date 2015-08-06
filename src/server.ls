@@ -29,5 +29,6 @@ app.post '/register-status-image' (req, res) -> (require './api/register-status-
 app.post '/register-talk-message-image' (req, res) -> (require './api/register-talk-message-image') req, res
 app.post '/register-bbs-post-image' (req, res) -> (require './api/register-bbs-post-image') req, res
 app.post '/register-bbs-thread-eyecatch' (req, res) -> (require './api/register-bbs-thread-eyecatch') req, res
+app.post '/delete-user-icon' (req, res) -> (require './api/delete-user-icon') req, res
 
 app.listen config.port
