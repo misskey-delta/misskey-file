@@ -11,7 +11,7 @@ module.exports = (req, res, save-path) ->
 			path = req.files.image.path
 			image = fs.read-file-sync path
 			fs.unlink path
-			save-file save-path image .then do
+			save-file save-path, image .then do
 				->
 					res.send save-path
 				(err) ->
