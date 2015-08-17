@@ -22,6 +22,7 @@ app.all '*' (req, res, next) ->
 	console.log 'kyoppie'
 	next!
 
+app.post '/register-application-icon' (req, res) -> (require './api/register-application-icon') req, res
 app.post '/register-user-icon' (req, res) -> (require './api/register-user-icon') req, res
 app.post '/register-user-banner' (req, res) -> (require './api/register-user-banner') req, res
 app.post '/register-user-wallpaper' (req, res) -> (require './api/register-user-wallpaper') req, res
