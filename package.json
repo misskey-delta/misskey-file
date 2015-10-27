@@ -1,44 +1,42 @@
 {
-  "name": "misskey-image",
-  "description": "Misskey Image Server",
+  "name": "misskey-usercontents",
   "version": "0.0.0",
-  "private": true,
-  "license": "MIT",
-  "homepage": "https://github.com/syuilo/Misskey-Image.git",
-  "bugs": "http://github.com/syuilo/Misskey-Image/issues",
+  "description": "Misskey API",
+  "main": "./built/index.js",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/syuilo/Misskey-Image.git"
+    "url": "https://github.com/MissKernel/Misskey-UserContents.git"
   },
-  "main": "./",
   "scripts": {
+    "start": "node ./built/index.js",
+    "dtsm": "dtsm --insight false install",
     "build": "gulp build",
-    "test": "gulp test",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "lint": "gulp lint",
+    "clean": "gulp clean",
+    "clean-all": "gulp clean-all",
+    "test": "gulp test"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.0.2",
+    "dtsm": "^0.11.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-tslint": "^3.3.0",
+    "gulp-typescript": "^2.8.1",
+    "tslint": "^2.5.0",
+    "typescript": "^1.6.2",
+    "typescript-require": "^0.2.9"
   },
   "dependencies": {
     "body-parser": "1.13.2",
-    "express": "4.13.1",
-    "gm": "1.18.1",
+    "express": "4.13.3",
     "http2": "3.2.0",
     "jade": "1.11.0",
     "mkdirp": "0.5.1",
-    "multer": "0.1.8",
-    "prelude-ls": "1.1.2",
-    "livescript": "1.4.0",
-    "gulp": "3.9.0",
-    "gulp-livescript": "2.4.0"
+    "multer": "0.1.8"
   },
-  "author": {
-    "name": "syuilo",
-    "email": "syuilotan@yahoo.co.jp",
-    "url": "https://github.com/syuilo"
-  },
-  "contributors": [
-    {
-      "name": "syuilo",
-      "email": "syuilotan@yahoo.co.jp",
-      "url": "https://github.com/syuilo"
-    }
-  ]
+  "private": true
 }
