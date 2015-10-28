@@ -14,18 +14,19 @@ module.exports = (req: express.Request, res: express.Response) => {
 			const fileBuffer: Buffer = fs.readFileSync(tmppath);
 			fs.unlink(tmppath);
 
-			const savePath: string = `${config.storagePath}/${generateRandom()}/${fileName}`;
-			mkdirp(path.dirname(savePath), (mkdirErr: any) => {
+			const publicPath: string = `${generateRandom()}/${fileName}`;
+			const privatePath: string = `${config.storagePath}/${publicPath}`;
+			mkdirp(path.dirname(privatePath), (mkdirErr: any) => {
 				if (mkdirErr !== null) {
 					console.error(mkdirErr);
 					res.sendStatus(500);
 				} else {
-					fs.writeFile(savePath, fileBuffer, (writeFileErr: NodeJS.ErrnoException) => {
+					fs.writeFile(privatePath, fileBuffer, (writeFileErr: NodeJS.ErrnoException) => {
 					if (writeFileErr !== null) {
 						console.error(writeFileErr);
 						res.sendStatus(500);
 					} else {
-						res.sendStatus(200);
+						res.send(publicPath);
 					}
 				});
 				}
