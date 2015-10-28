@@ -24,18 +24,19 @@ module.exports = function (req, res) {
                 var fileName = file.originalname;
                 var fileBuffer = fs.readFileSync(tmppath);
                 fs.unlink(tmppath);
-                var savePath = _config['default'].storagePath + '/' + generateRandom() + '/' + fileName;
-                mkdirp(path.dirname(savePath), function (mkdirErr) {
+                var publicPath = generateRandom() + '/' + fileName;
+                var privatePath = _config['default'].storagePath + '/' + publicPath;
+                mkdirp(path.dirname(privatePath), function (mkdirErr) {
                     if (mkdirErr !== null) {
                         console.error(mkdirErr);
                         res.sendStatus(500);
                     } else {
-                        fs.writeFile(savePath, fileBuffer, function (writeFileErr) {
+                        fs.writeFile(privatePath, fileBuffer, function (writeFileErr) {
                             if (writeFileErr !== null) {
                                 console.error(writeFileErr);
                                 res.sendStatus(500);
                             } else {
-                                res.sendStatus(200);
+                                res.send(publicPath);
                             }
                         });
                     }
