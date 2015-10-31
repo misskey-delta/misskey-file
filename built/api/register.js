@@ -24,7 +24,7 @@ module.exports = function (req, res) {
                 var fileName = file.originalname;
                 var fileBuffer = fs.readFileSync(tmppath);
                 fs.unlink(tmppath);
-                var publicPath = generateRandom() + '/' + fileName;
+                var publicPath = 'usercontents/' + generateRandom() + '/' + fileName;
                 var privatePath = _config['default'].storagePath + '/' + publicPath;
                 mkdirp(path.dirname(privatePath), function (mkdirErr) {
                     if (mkdirErr !== null) {
