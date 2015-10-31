@@ -14,7 +14,7 @@ module.exports = (req: express.Request, res: express.Response) => {
 			const fileBuffer: Buffer = fs.readFileSync(tmppath);
 			fs.unlink(tmppath);
 
-			const publicPath: string = `${generateRandom()}/${fileName}`;
+			const publicPath: string = `usercontents/${generateRandom()}/${fileName}`;
 			const privatePath: string = `${config.storagePath}/${publicPath}`;
 			mkdirp(path.dirname(privatePath), (mkdirErr: any) => {
 				if (mkdirErr !== null) {
@@ -26,6 +26,7 @@ module.exports = (req: express.Request, res: express.Response) => {
 						console.error(writeFileErr);
 						res.sendStatus(500);
 					} else {
+						console.log(`Registered: ${privatePath}`);
 						res.send(publicPath);
 					}
 				});

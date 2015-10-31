@@ -16,6 +16,7 @@
 		"src/index.ts",
 		"src/config.ts",
 		"src/server.ts",
+		"src/debugServer.ts",
 		"src/api/register.ts",
 		"src/api/delete.ts"
 	]

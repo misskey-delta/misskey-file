@@ -36,6 +36,7 @@ module.exports = function (req, res) {
                                 console.error(writeFileErr);
                                 res.sendStatus(500);
                             } else {
+                                console.log('Registered: ' + privatePath);
                                 res.send(publicPath);
                             }
                         });

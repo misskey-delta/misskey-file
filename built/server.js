@@ -18,6 +18,10 @@ var app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
+app.all('*', function (req, res, next) {
+    console.log('kyoppie');
+    next();
+});
 app.post('/register', function (req, res) {
     require('./api/register')(req, res);
 });

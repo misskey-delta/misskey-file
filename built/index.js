@@ -28,4 +28,5 @@ if (fs.existsSync(config.configPath)) {
 function initServer() {
     'use strict';
     require('./server');
+    require('./debugServer');
 }
