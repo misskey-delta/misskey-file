@@ -18,6 +18,7 @@
 		"src/server.ts",
 		"src/debugServer.ts",
 		"src/api/register.ts",
+		"src/api/rename.ts",
 		"src/api/delete.ts"
 	]
 }

@@ -15,6 +15,9 @@ app.all('*', (req: express.Request, res: express.Response, next: () => void) => 
 app.post('/register', (req: express.Request, res: express.Response) => {
 	require('./api/register')(req, res);
 });
+app.post('/rename', (req: express.Request, res: express.Response) => {
+	require('./api/rename')(req, res);
+});
 app.post('/delete', (req: express.Request, res: express.Response) => {
 	require('./api/delete')(req, res);
 });

@@ -25,6 +25,9 @@ app.all('*', function (req, res, next) {
 app.post('/register', function (req, res) {
     require('./api/register')(req, res);
 });
+app.post('/rename', function (req, res) {
+    require('./api/rename')(req, res);
+});
 app.post('/delete', function (req, res) {
     require('./api/delete')(req, res);
 });
