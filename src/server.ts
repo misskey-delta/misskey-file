@@ -24,8 +24,11 @@ app.use((req: express.Request, res: express.Response, next: () => void) => {
 });
 
 app.get('*', (req: express.Request, res: express.Response) => {
-	console.log(req.path);
-	res.sendFile(`${config.storagePath}/${req.path}`);
+	const path: string = decodeURI(req.path);
+	if (path.indexOf('..') !== -1) {
+		return res.status(400).send('invalid path');
+	}
+	res.sendFile(`${config.storagePath}/${path}`);
 });
 
 app.listen(config.port.http);

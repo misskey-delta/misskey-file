@@ -27,7 +27,10 @@ app.use(function (req, res, next) {
     }
 });
 app.get('*', function (req, res) {
-    console.log(req.path);
-    res.sendFile(_config['default'].storagePath + '/' + req.path);
+    var path = decodeURI(req.path);
+    if (path.indexOf('..') !== -1) {
+        return res.status(400).send('invalid path');
+    }
+    res.sendFile(_config['default'].storagePath + '/' + path);
 });
 app.listen(_config['default'].port.http);
