@@ -1,32 +1,20 @@
 'use strict';
 
-var _fs = require('fs');
+var _cluster = require('cluster');
 
-var fs = _fs;
+var cluster = _cluster;
 
-var _config = require('./config');
-
-var config = _config;
-
-console.log('Welcome to Misskey UCS');
-if (fs.existsSync(config.configPath)) {
-    initServer();
-} else {
-    var conf = config.defaultConfig;
-    if (!fs.existsSync(config.configDirectoryPath)) {
-        fs.mkdirSync(config.configDirectoryPath);
+if (cluster.isMaster) {
+    console.log('Welcome to Misskey UCS');
+    var cpuCount = require('os').cpus().length;
+    for (var i = 0; i < cpuCount; i++) {
+        cluster.fork();
     }
-    fs.writeFile(config.configPath, JSON.stringify(conf, null, '\t'), function (writeErr) {
-        if (writeErr) {
-            console.log('configの書き込み時に問題が発生しました:');
-            console.error(writeErr);
-        } else {
-            process.exit(0);
-        }
-    });
-}
-function initServer() {
-    'use strict';
+} else {
     require('./server');
-    require('./debugServer');
+    require('./apiServer');
 }
+cluster.on('exit', function (worker) {
+    console.log('\u001b[1;31m' + worker.id + ' died :(\u001b[0m');
+    cluster.fork();
+});

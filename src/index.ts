@@ -1,28 +1,24 @@
-import * as fs from 'fs';
-import * as config from './config';
+import * as cluster from 'cluster';
 
-console.log('Welcome to Misskey UCS');
+if (cluster.isMaster) {
+	console.log('Welcome to Misskey UCS');
 
-if (fs.existsSync(config.configPath)) {
-	initServer();
-} else {
-	const conf: config.IConfig = config.defaultConfig;
+	// Count the machine's CPUs
+	const cpuCount: number = require('os').cpus().length;
 
-	if (!fs.existsSync(config.configDirectoryPath)) {
-		fs.mkdirSync(config.configDirectoryPath);
+	// Create a worker for each CPU
+	for (var i = 0; i < cpuCount; i++) {
+		cluster.fork();
 	}
-	fs.writeFile(config.configPath, JSON.stringify(conf, null, '\t'), (writeErr: NodeJS.ErrnoException) => {
-		if (writeErr) {
-			console.log('configの書き込み時に問題が発生しました:');
-			console.error(writeErr);
-		} else {
-			process.exit(0);
-		}
-	});
+} else {
+	require('./server');
+	require('./apiServer');
 }
 
-function initServer(): void {
-	'use strict';
-	require('./server');
-	require('./debugServer');
-}
+// Listen for dying workers
+cluster.on('exit', (worker: cluster.Worker) => {
+	// Replace the dead worker,
+	// we're not sentimental
+	console.log(`\u001b[1;31m${worker.id} died :(\u001b[0m`);
+	cluster.fork();
+});
