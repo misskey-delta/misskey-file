@@ -8,13 +8,14 @@ module.exports = (req: express.Request, res: express.Response) => {
 	const passkey: string = req.body['passkey'];
 	if (passkey === config.passkey) {
 		if (Object.keys(req.files).length === 1) {
+			const fileId: string = req.body['file-id'];
 			const file: Express.Multer.File = req.files['file'];
 			const tmppath: string = file.path;
 			const fileName: string = file.originalname;
 			const fileBuffer: Buffer = fs.readFileSync(tmppath);
 			fs.unlink(tmppath);
 
-			const publicPath: string = `usercontents/${generateRandom()}/${fileName}`;
+			const publicPath: string = `usercontents/${fileId}/${fileName}`;
 			const privatePath: string = `${config.storagePath}/${publicPath}`;
 			mkdirp(path.dirname(privatePath), (mkdirErr: any) => {
 				if (mkdirErr !== null) {
@@ -39,13 +40,3 @@ module.exports = (req: express.Request, res: express.Response) => {
 		res.sendStatus(400);
 	}
 };
-
-function generateRandom(): string {
-	'use strict';
-	const chars: string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
-	var rnd: string = '';
-	for (var i: number = 0; i < 64; i++) {
-		rnd += chars[Math.floor(Math.random() * chars.length)];
-	}
-	return rnd;
-}
