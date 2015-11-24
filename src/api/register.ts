@@ -15,7 +15,7 @@ module.exports = (req: express.Request, res: express.Response) => {
 			const fileBuffer: Buffer = fs.readFileSync(tmppath);
 			fs.unlink(tmppath);
 
-			const publicPath: string = `usercontents/${fileId}/${fileName}`;
+			const publicPath: string = `${fileId}/${fileName}`;
 			const privatePath: string = `${config.storagePath}/${publicPath}`;
 			mkdirp(path.dirname(privatePath), (mkdirErr: any) => {
 				if (mkdirErr !== null) {
