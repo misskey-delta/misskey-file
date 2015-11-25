@@ -1,6 +1,9 @@
+// import * as fs from 'fs';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import config from './config';
+
+const gm: any = require('gm');
 
 const app: express.Express = express();
 app.disable('x-powered-by');
@@ -28,7 +31,18 @@ app.get('*', (req: express.Request, res: express.Response) => {
 	if (path.indexOf('..') !== -1) {
 		return res.status(400).send('invalid path');
 	}
-	res.sendFile(`${config.storagePath}/${path}`);
+	if (req.query.mini !== undefined) {
+		gm(`${config.storagePath}/${path}`)
+			.resize(150, 150)
+			.compress('jpeg')
+			.quality('80')
+			.toBuffer('jpeg', (err: Error, buffer: Buffer) => {
+				res.header('Content-Type', 'image/jpeg');
+				res.send(buffer);
+		});
+	} else {
+		res.sendFile(`${config.storagePath}/${path}`);
+	}
 });
 
 app.listen(config.port.http);

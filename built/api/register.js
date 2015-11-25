@@ -19,12 +19,13 @@ module.exports = function (req, res) {
     if (passkey === _config['default'].passkey) {
         if (Object.keys(req.files).length === 1) {
             (function () {
+                var fileId = req.body['file-id'];
                 var file = req.files['file'];
                 var tmppath = file.path;
                 var fileName = file.originalname;
                 var fileBuffer = fs.readFileSync(tmppath);
                 fs.unlink(tmppath);
-                var publicPath = 'usercontents/' + generateRandom() + '/' + fileName;
+                var publicPath = fileId + '/' + fileName;
                 var privatePath = _config['default'].storagePath + '/' + publicPath;
                 mkdirp(path.dirname(privatePath), function (mkdirErr) {
                     if (mkdirErr !== null) {
@@ -50,12 +51,3 @@ module.exports = function (req, res) {
         res.sendStatus(400);
     }
 };
-function generateRandom() {
-    'use strict';
-    var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
-    var rnd = '';
-    for (var i = 0; i < 64; i++) {
-        rnd += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return rnd;
-}

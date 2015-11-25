@@ -10,6 +10,7 @@ var bodyParser = _bodyParser;
 
 var _config = require('./config');
 
+var gm = require('gm');
 var app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +32,13 @@ app.get('*', function (req, res) {
     if (path.indexOf('..') !== -1) {
         return res.status(400).send('invalid path');
     }
-    res.sendFile(_config['default'].storagePath + '/' + path);
+    if (req.query.mini !== undefined) {
+        gm(_config['default'].storagePath + '/' + path).resize(150, 150).compress('jpeg').quality('80').toBuffer('jpeg', function (err, buffer) {
+            res.header('Content-Type', 'image/jpeg');
+            res.send(buffer);
+        });
+    } else {
+        res.sendFile(_config['default'].storagePath + '/' + path);
+    }
 });
 app.listen(_config['default'].port.http);
