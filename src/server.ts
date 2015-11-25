@@ -3,8 +3,6 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import config from './config';
 
-const gm: any = require('gm');
-
 const app: express.Express = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -32,14 +30,12 @@ app.get('*', (req: express.Request, res: express.Response) => {
 		return res.status(400).send('invalid path');
 	}
 	if (req.query.mini !== undefined) {
-		gm(`${config.storagePath}/${path}`)
-			.resize(150, 150)
-			.compress('jpeg')
-			.quality('80')
-			.toBuffer('jpeg', (err: Error, buffer: Buffer) => {
-				res.header('Content-Type', 'image/jpeg');
-				res.send(buffer);
-		});
+		const tokens = path.split('/');
+		const filename = tokens[tokens.length - 1];
+		tokens[tokens.length - 1] = 'minified/' + filename;
+		const minifiedPath = tokens.join('/');
+
+		res.sendFile(`${config.storagePath}/${minifiedPath}`);
 	} else {
 		res.sendFile(`${config.storagePath}/${path}`);
 	}

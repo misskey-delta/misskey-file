@@ -10,7 +10,6 @@ var bodyParser = _bodyParser;
 
 var _config = require('./config');
 
-var gm = require('gm');
 var app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,10 +32,11 @@ app.get('*', function (req, res) {
         return res.status(400).send('invalid path');
     }
     if (req.query.mini !== undefined) {
-        gm(_config['default'].storagePath + '/' + path).resize(150, 150).compress('jpeg').quality('80').toBuffer('jpeg', function (err, buffer) {
-            res.header('Content-Type', 'image/jpeg');
-            res.send(buffer);
-        });
+        var tokens = path.split('/');
+        var filename = tokens[tokens.length - 1];
+        tokens[tokens.length - 1] = 'minified/' + filename;
+        var minifiedPath = tokens.join('/');
+        res.sendFile(_config['default'].storagePath + '/' + minifiedPath);
     } else {
         res.sendFile(_config['default'].storagePath + '/' + path);
     }
