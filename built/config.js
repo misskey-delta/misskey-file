@@ -4,7 +4,7 @@ var homeDirPath = process.env[process.platform === 'win32' ? 'USERPROFILE' : 'HO
 exports.homeDirPath = homeDirPath;
 var configDirName = '.misskey';
 exports.configDirName = configDirName;
-var configFileName = 'userContentsServer.json';
+var configFileName = 'fileServer.json';
 exports.configFileName = configFileName;
 var configDirectoryPath = homeDirPath + '/' + configDirName;
 exports.configDirectoryPath = configDirectoryPath;
