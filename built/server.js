@@ -31,6 +31,9 @@ app.get('*', function (req, res) {
     if (path.indexOf('..') !== -1) {
         return res.status(400).send('invalid path');
     }
+    if (req.query.download !== undefined) {
+        res.header('Content-Disposition', 'attachment');
+    }
     if (req.query.mini !== undefined) {
         var tokens = path.split('/');
         var filename = tokens[tokens.length - 1];
