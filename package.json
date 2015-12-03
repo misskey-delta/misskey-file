@@ -1,10 +1,10 @@
 {
-  "name": "misskey-usercontents",
+  "name": "misskey-file-server",
   "version": "0.0.0",
   "description": "Misskey API",
   "main": "./built/index.js",
   "repository": {
-    "url": "https://github.com/MissKernel/Misskey-UserContents.git"
+    "url": "https://github.com/MissKernel/Misskey-FileServer.git"
   },
   "scripts": {
     "start": "node ./built/index.js",
