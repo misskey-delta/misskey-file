@@ -45,13 +45,16 @@ module.exports = (req: express.Request, res: express.Response) => {
 							mkdirp(`${config.storagePath}/${fileId}/minified`, (mkdirErr: any) => {
 								// サムネイル生成
 								gm(privatePath)
-									.resize(150, 150)
-									.compress('jpeg')
-									.quality('80')
-									.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
-										fs.writeFile(`${config.storagePath}/${fileId}/minified/${fileName}`, thumbnail,  (writeFileErr: NodeJS.ErrnoException) => {
-											res.send(publicPath);
-										});
+								.resize(150, 150)
+								.compress('jpeg')
+								.quality('80')
+								.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
+									if (genThumbnailErr !== undefined && genThumbnailErr !== null) {
+										console.error(genThumbnailErr);
+									}
+									fs.writeFile(`${config.storagePath}/${fileId}/minified/${fileName}`, thumbnail,  (writeFileErr: NodeJS.ErrnoException) => {
+										res.send(publicPath);
+									});
 								});
 							});
 							break;
