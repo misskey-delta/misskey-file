@@ -1,21 +1,8 @@
 'use strict';
 
-var _express = require('express');
-
-var express = _interopRequireWildcard(_express);
-
-var _bodyParser = require('body-parser');
-
-var bodyParser = _interopRequireWildcard(_bodyParser);
-
-var _config = require('./config');
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
+var express = require('express');
+var bodyParser = require('body-parser');
+var config_1 = require('./config');
 var app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,9 +32,9 @@ app.get('*', function (req, res) {
         var filename = tokens[tokens.length - 1];
         tokens[tokens.length - 1] = 'minified/' + filename;
         var minifiedPath = tokens.join('/');
-        res.sendFile(_config2.default.storagePath + '/' + minifiedPath);
+        res.sendFile(config_1.default.storagePath + '/' + minifiedPath);
     } else {
-        res.sendFile(_config2.default.storagePath + '/' + path);
+        res.sendFile(config_1.default.storagePath + '/' + path);
     }
 });
-app.listen(_config2.default.port.http);
+app.listen(config_1.default.port.http);

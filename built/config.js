@@ -1,25 +1,21 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var homeDirPath = exports.homeDirPath = process.env[process.platform === 'win32' ? 'USERPROFILE' : 'HOME'];
-var configDirName = exports.configDirName = '.misskey';
-var configFileName = exports.configFileName = 'file.json';
-var configDirectoryPath = exports.configDirectoryPath = homeDirPath + '/' + configDirName;
-var configPath = exports.configPath = configDirectoryPath + '/' + configFileName;
+exports.homeDirPath = process.env[process.platform === 'win32' ? 'USERPROFILE' : 'HOME'];
+exports.configDirName = '.misskey';
+exports.configFileName = 'file.json';
+exports.configDirectoryPath = exports.homeDirPath + '/' + exports.configDirName;
+exports.configPath = exports.configDirectoryPath + '/' + exports.configFileName;
 exports.default = loadConfig();
-
 function loadConfig() {
     'use strict';
 
     try {
-        return require(configPath);
+        return require(exports.configPath);
     } catch (e) {
         return null;
     }
 }
-var defaultConfig = exports.defaultConfig = {
+exports.defaultConfig = {
     passkey: "",
     port: {
         internal: 616,
