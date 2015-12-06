@@ -1,10 +1,10 @@
 {
-  "name": "misskey-file-server",
+  "name": "misskey-file",
   "version": "0.0.0",
-  "description": "Misskey API",
+  "description": "Misskey File",
   "main": "./built/index.js",
   "repository": {
-    "url": "https://github.com/MissKernel/Misskey-FileServer.git"
+    "url": "https://github.com/MissKernel/Misskey-File.git"
   },
   "scripts": {
     "start": "node ./built/index.js",
