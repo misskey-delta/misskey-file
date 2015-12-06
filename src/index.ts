@@ -1,7 +1,7 @@
 import * as cluster from 'cluster';
 
 if (cluster.isMaster) {
-	console.log('Welcome to Misskey UCS');
+	console.log('Welcome to Misskey File');
 
 	// Count the machine's CPUs
 	const cpuCount: number = require('os').cpus().length;
@@ -12,7 +12,7 @@ if (cluster.isMaster) {
 	}
 } else {
 	require('./server');
-	require('./apiServer');
+	require('./api-server');
 }
 
 // Listen for dying workers
