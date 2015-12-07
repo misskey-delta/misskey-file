@@ -1,4 +1,7 @@
-// import * as fs from 'fs';
+import * as fs from 'fs';
+import * as http from 'http';
+import * as https from 'https';
+import * as cluster from 'cluster';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import config from './config';
@@ -44,4 +47,31 @@ app.get('*', (req: express.Request, res: express.Response) => {
 	}
 });
 
-app.listen(config.port.http);
+let server: http.Server | https.Server;
+let port: number;
+
+if (config.https.enable) {
+	port = config.port.https;
+	server = https.createServer({
+		key: fs.readFileSync(config.https.keyPath),
+		cert: fs.readFileSync(config.https.certPath)
+	}, app);
+
+	http.createServer((req, res) => {
+		res.writeHead(301, {
+			Location: config.url + req.url
+		});
+		res.end();
+	}).listen(config.port.http);
+} else {
+	port = config.port.http;
+	server = http.createServer(app);
+}
+
+server.listen(config.port.http, () => {
+	const listenhost: string = server.address().address;
+	const listenport: number = server.address().port;
+
+	console.log(
+		`\u001b[1;32m${cluster.worker.id} is now listening at ${listenhost}:${listenport}\u001b[0m`);
+});

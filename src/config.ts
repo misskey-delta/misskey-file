@@ -22,15 +22,11 @@ export interface IConfig {
 		http: number;
 		https: number;
 	};
+	https: {
+		enable: boolean;
+		keyPath: string;
+		certPath: string;
+	};
+	url: string;
 	storagePath: string;
 }
-
-export const defaultConfig: IConfig = {
-	passkey: "",
-	port: {
-		internal: 616,
-		http: 80,
-		https: 443
-	},
-	storagePath: ""
-};
