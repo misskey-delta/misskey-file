@@ -15,12 +15,3 @@ function loadConfig() {
         return null;
     }
 }
-exports.defaultConfig = {
-    passkey: "",
-    port: {
-        internal: 616,
-        http: 80,
-        https: 443
-    },
-    storagePath: ""
-};

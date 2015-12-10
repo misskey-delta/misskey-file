@@ -27,7 +27,11 @@ app.use((req: express.Request, res: express.Response, next: () => void) => {
 	}
 });
 
-app.get('*', (req: express.Request, res: express.Response) => {
+app.get('/', (req, res) => {
+	res.send('Misskeyにアップロードされたファイルを保管・配信するサーバーです。https://misskey.xyz');
+});
+
+app.get('*', (req, res) => {
 	const path: string = decodeURI(req.path);
 	if (path.indexOf('..') !== -1) {
 		return res.status(400).send('invalid path');
