@@ -39,13 +39,13 @@ app.get('*', (req, res) => {
 	if (req.query.download !== undefined) {
 		res.header('Content-Disposition', 'attachment');
 	}
-	if (req.query.mini !== undefined) {
+	if (req.query.thumbnail !== undefined) {
 		const tokens = path.split('/');
 		const filename = tokens[tokens.length - 1];
 		tokens[tokens.length - 1] = 'minified/' + filename;
-		const minifiedPath = tokens.join('/');
+		const thumbnailPath = tokens.join('/');
 
-		res.sendFile(`${config.storagePath}/${minifiedPath}`);
+		res.sendFile(`${config.storagePath}/${thumbnailPath}`);
 	} else {
 		res.sendFile(`${config.storagePath}/${path}`);
 	}

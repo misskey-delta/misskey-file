@@ -34,12 +34,12 @@ app.get('*', function (req, res) {
     if (req.query.download !== undefined) {
         res.header('Content-Disposition', 'attachment');
     }
-    if (req.query.mini !== undefined) {
+    if (req.query.thumbnail !== undefined) {
         var tokens = path.split('/');
         var filename = tokens[tokens.length - 1];
         tokens[tokens.length - 1] = 'minified/' + filename;
-        var minifiedPath = tokens.join('/');
-        res.sendFile(config_1.default.storagePath + '/' + minifiedPath);
+        var thumbnailPath = tokens.join('/');
+        res.sendFile(config_1.default.storagePath + '/' + thumbnailPath);
     } else {
         res.sendFile(config_1.default.storagePath + '/' + path);
     }
