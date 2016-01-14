@@ -6,7 +6,7 @@ module.exports = (req: express.Request, res: express.Response) => {
 	const passkey: string = req.body['passkey'];
 	if (passkey === config.passkey) {
 		const path: string = req.body['path'];
-		fs.unlink(path, (err: NodeJS.ErrnoException) => {
+		fs.unlink(`${config.storagePath}/${path}`, (err: NodeJS.ErrnoException) => {
 			if (err !== null) {
 				console.log(err);
 				res.sendStatus(500);
