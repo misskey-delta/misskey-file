@@ -22,15 +22,15 @@
     "gulp-babel": "6.1.1",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.0.1",
-    "gulp-tslint": "4.2.2",
+    "gulp-tslint": "4.3.1",
     "gulp-typescript": "2.10.0",
-    "tslint": "3.2.1",
+    "tslint": "3.3.0",
     "typescript": "1.7.5",
     "typescript-require": "0.2.9"
   },
   "dependencies": {
     "body-parser": "1.14.2",
-    "express": "4.13.3",
+    "express": "4.13.4",
     "file-type": "^3.3.0",
     "gm": "1.21.1",
     "http2": "3.2.0",
