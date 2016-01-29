@@ -6,6 +6,7 @@ var https = require('https');
 var cluster = require('cluster');
 var express = require('express');
 var bodyParser = require('body-parser');
+var gm = require('gm');
 var config_1 = require('./config');
 var app = express();
 app.disable('x-powered-by');
@@ -28,11 +29,14 @@ app.get('/', function (req, res) {
 });
 app.get('*', function (req, res) {
     var path = decodeURI(req.path);
+    var g = null;
     if (path.indexOf('..') !== -1) {
         return res.status(400).send('invalid path');
     }
     if (req.query.download !== undefined) {
         res.header('Content-Disposition', 'attachment');
+        res.sendFile(config_1.default.storagePath + '/' + path);
+        return;
     }
     if (req.query.thumbnail !== undefined) {
         var tokens = path.split('/');
@@ -40,6 +44,30 @@ app.get('*', function (req, res) {
         tokens[tokens.length - 1] = 'minified/' + filename;
         var thumbnailPath = tokens.join('/');
         res.sendFile(config_1.default.storagePath + '/' + thumbnailPath);
+        return;
+    }
+    if (req.query.size !== undefined) {
+        if (g === null) {
+            g = gm(config_1.default.storagePath + '/' + path);
+        }
+        g = g.resize(req.query.size, req.query.size);
+    }
+    if (req.query.quality !== undefined) {
+        if (g === null) {
+            g = gm(config_1.default.storagePath + '/' + path);
+        }
+        g = g.compress('jpeg').quality(req.query.quality);
+    }
+    if (g !== null) {
+        g.toBuffer('jpeg', function (err, img) {
+            if (err !== undefined && err !== null) {
+                console.error(err);
+                res.status(500).send(err);
+                return;
+            }
+            res.header('Content-Type', 'image/jpeg');
+            res.send(img);
+        });
     } else {
         res.sendFile(config_1.default.storagePath + '/' + path);
     }

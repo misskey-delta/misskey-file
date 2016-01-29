@@ -4,6 +4,7 @@ import * as https from 'https';
 import * as cluster from 'cluster';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+const gm: any = require('gm');
 import config from './config';
 
 const app: express.Express = express();
@@ -33,12 +34,18 @@ app.get('/', (req, res) => {
 
 app.get('*', (req, res) => {
 	const path: string = decodeURI(req.path);
+	let g: any = null;
+
 	if (path.indexOf('..') !== -1) {
 		return res.status(400).send('invalid path');
 	}
+
 	if (req.query.download !== undefined) {
 		res.header('Content-Disposition', 'attachment');
+		res.sendFile(`${config.storagePath}/${path}`);
+		return;
 	}
+
 	if (req.query.thumbnail !== undefined) {
 		const tokens = path.split('/');
 		const filename = tokens[tokens.length - 1];
@@ -46,6 +53,34 @@ app.get('*', (req, res) => {
 		const thumbnailPath = tokens.join('/');
 
 		res.sendFile(`${config.storagePath}/${thumbnailPath}`);
+		return;
+	}
+
+	if (req.query.size !== undefined) {
+		if (g === null) {
+			g = gm(`${config.storagePath}/${path}`);
+		}
+		g = g.resize(req.query.size, req.query.size);
+	}
+	
+	if (req.query.quality !== undefined) {
+		if (g === null) {
+			g = gm(`${config.storagePath}/${path}`);
+		}
+		g = g.compress('jpeg')
+			.quality(req.query.quality);
+	}
+	
+	if (g !== null) {
+		g.toBuffer('jpeg', (err: Error, img: Buffer) => {
+			if (err !== undefined && err !== null) {
+				console.error(err);
+				res.status(500).send(err);
+				return;
+			}
+			res.header('Content-Type', 'image/jpeg');
+			res.send(img);
+		});
 	} else {
 		res.sendFile(`${config.storagePath}/${path}`);
 	}
