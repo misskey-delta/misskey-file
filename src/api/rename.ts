@@ -11,9 +11,11 @@ module.exports = (req: express.Request, res: express.Response) => {
 		} else {
 			const oldPath: string = `${config.storagePath}/${req.body['old-path']}`;
 			const newPath: string =
-				`${config.storagePath}/${req.body['old-path'].substring(0, req.body['old-path'].lastIndexOf('/'))}/${newName}`;
+				`${req.body['old-path'].substring(0, req.body['old-path'].lastIndexOf('/'))}/${newName}`;
+			const newStoragePath: string =
+				`${config.storagePath}/${newPath}`;
 
-			fs.rename(oldPath, newPath, (err: NodeJS.ErrnoException) => {
+			fs.rename(oldPath, newStoragePath, (err: NodeJS.ErrnoException) => {
 				if (err !== null) {
 					console.log(err);
 					res.sendStatus(500);
