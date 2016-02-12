@@ -37,41 +37,7 @@ module.exports = (req: express.Request, res: express.Response) => {
 				return res.sendStatus(500);
 			}
 
-			const detectedFileType = fileType(fileBuffer);
-			if (detectedFileType === null) {
-				return res.send(publicPath);
-			}
-			switch (detectedFileType.mime) {
-				case 'image/jpeg':
-				case 'image/png':
-				case 'image/gif':
-				case 'image/webp':
-				case 'image/tiff':
-				case 'image/bmp':
-					mkdirp(`${config.storagePath}/${fileId}/minified`, (mkdirErr: any) => {
-						if (mkdirErr !== undefined && mkdirErr !== null) {
-							console.error(mkdirErr);
-							return res.send(publicPath);
-						}
-						// サムネイル生成
-						gm(privatePath)
-						.resize(150, 150)
-						.compress('jpeg')
-						.quality('80')
-						.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
-							if (genThumbnailErr !== undefined && genThumbnailErr !== null) {
-								console.error(genThumbnailErr);
-								return res.send(publicPath);
-							}
-							fs.writeFile(`${config.storagePath}/${fileId}/minified/${fileName}`, thumbnail,  (writeFileErr: NodeJS.ErrnoException) => {
-								res.send(publicPath);
-							});
-						});
-					});
-					break;
-				default:
-					return res.send(publicPath);
-			}
+			return res.send(publicPath);
 		});
 	});
 };

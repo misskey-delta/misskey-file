@@ -39,11 +39,10 @@ app.get('*', function (req, res) {
         return;
     }
     if (req.query.thumbnail !== undefined) {
-        var tokens = path.split('/');
-        var filename = tokens[tokens.length - 1];
-        tokens[tokens.length - 1] = 'minified/' + filename;
-        var thumbnailPath = tokens.join('/');
-        res.sendFile(config_1.default.storagePath + '/' + thumbnailPath);
+        gm(config_1.default.storagePath + '/' + path).resize(150, 150).compress('jpeg').quality('80').toBuffer('jpeg', function (genThumbnailErr, thumbnail) {
+            res.header('Content-Type', 'image/jpeg');
+            res.send(thumbnail);
+        });
         return;
     }
     if (req.query.size !== undefined) {

@@ -32,36 +32,7 @@ module.exports = function (req, res) {
                 console.error(writeFileErr);
                 return res.sendStatus(500);
             }
-            var detectedFileType = fileType(fileBuffer);
-            if (detectedFileType === null) {
-                return res.send(publicPath);
-            }
-            switch (detectedFileType.mime) {
-                case 'image/jpeg':
-                case 'image/png':
-                case 'image/gif':
-                case 'image/webp':
-                case 'image/tiff':
-                case 'image/bmp':
-                    mkdirp(config_1.default.storagePath + '/' + fileId + '/minified', function (mkdirErr) {
-                        if (mkdirErr !== undefined && mkdirErr !== null) {
-                            console.error(mkdirErr);
-                            return res.send(publicPath);
-                        }
-                        gm(privatePath).resize(150, 150).compress('jpeg').quality('80').toBuffer('jpeg', function (genThumbnailErr, thumbnail) {
-                            if (genThumbnailErr !== undefined && genThumbnailErr !== null) {
-                                console.error(genThumbnailErr);
-                                return res.send(publicPath);
-                            }
-                            fs.writeFile(config_1.default.storagePath + '/' + fileId + '/minified/' + fileName, thumbnail, function (writeFileErr) {
-                                res.send(publicPath);
-                            });
-                        });
-                    });
-                    break;
-                default:
-                    return res.send(publicPath);
-            }
+            return res.send(publicPath);
         });
     });
 };

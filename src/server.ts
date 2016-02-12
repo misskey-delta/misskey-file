@@ -47,12 +47,14 @@ app.get('*', (req, res) => {
 	}
 
 	if (req.query.thumbnail !== undefined) {
-		const tokens = path.split('/');
-		const filename = tokens[tokens.length - 1];
-		tokens[tokens.length - 1] = 'minified/' + filename;
-		const thumbnailPath = tokens.join('/');
-
-		res.sendFile(`${config.storagePath}/${thumbnailPath}`);
+		gm(`${config.storagePath}/${path}`)
+		.resize(150, 150)
+		.compress('jpeg')
+		.quality('80')
+		.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
+			res.header('Content-Type', 'image/jpeg');
+			res.send(thumbnail);
+		});
 		return;
 	}
 
