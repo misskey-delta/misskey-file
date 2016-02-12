@@ -6,15 +6,23 @@ module.exports = (req: express.Request, res: express.Response) => {
 	const passkey: string = req.body['passkey'];
 	if (passkey === config.passkey) {
 		const path: string = req.body['path'];
-		fs.unlink(`${config.storagePath}/${path}`, (err: NodeJS.ErrnoException) => {
-			if (err !== null) {
-				console.log(err);
-				res.sendStatus(500);
-			} else {
-				res.sendStatus(200);
-			}
-		});
+		deleteFolderRecursive(`${config.storagePath}/${path}/../`);
+		res.sendStatus(200);
 	} else {
 		res.sendStatus(400);
 	}
 };
+
+function deleteFolderRecursive(path: string): void {
+	if (fs.existsSync(path)) {
+		fs.readdirSync(path).forEach(function(file) {
+			var curPath = path + "/" + file;
+			if(fs.statSync(curPath).isDirectory()) { // recurse
+				deleteFolderRecursive(curPath);
+			} else { // delete file
+				fs.unlinkSync(curPath);
+			}
+		});
+		fs.rmdirSync(path);
+	}
+}

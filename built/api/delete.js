@@ -6,15 +6,22 @@ module.exports = function (req, res) {
     var passkey = req.body['passkey'];
     if (passkey === config_1.default.passkey) {
         var path = req.body['path'];
-        fs.unlink(config_1.default.storagePath + '/' + path, function (err) {
-            if (err !== null) {
-                console.log(err);
-                res.sendStatus(500);
-            } else {
-                res.sendStatus(200);
-            }
-        });
+        deleteFolderRecursive(config_1.default.storagePath + '/' + path + '/../');
+        res.sendStatus(200);
     } else {
         res.sendStatus(400);
     }
 };
+function deleteFolderRecursive(path) {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function (file) {
+            var curPath = path + "/" + file;
+            if (fs.statSync(curPath).isDirectory()) {
+                deleteFolderRecursive(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+}
