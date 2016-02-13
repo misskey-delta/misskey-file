@@ -9,9 +9,14 @@ module.exports = function (req, res) {
         if (path.indexOf('..') > -1) {
             return res.sendStatus(400);
         }
+        console.log('DELETE: ' + (config_1.default.storagePath + '/' + path + '/../'));
         rmrf(config_1.default.storagePath + '/' + path + '/../', {
             disableGlob: true
-        }, function () {
+        }, function (err) {
+            if (err !== null) {
+                console.error(err);
+                return res.sendStatus(500);
+            }
             res.sendStatus(200);
         });
     } else {

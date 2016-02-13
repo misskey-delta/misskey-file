@@ -10,9 +10,14 @@ module.exports = (req: express.Request, res: express.Response) => {
 		if (path.indexOf('..') > -1) {
 			return res.sendStatus(400);
 		}
+		console.log('DELETE: ' + `${config.storagePath}/${path}/../`);
 		rmrf(`${config.storagePath}/${path}/../`, {
 			disableGlob: true
-		}, () => {
+		}, (err: any) => {
+			if (err !== null) {
+				console.error(err);
+				return res.sendStatus(500);
+			}
 			res.sendStatus(200);
 		});
 	} else {
