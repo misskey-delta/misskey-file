@@ -24,6 +24,10 @@ module.exports = (req: express.Request, res: express.Response) => {
 	const fileBuffer: Buffer = fs.readFileSync(tmppath);
 	fs.unlink(tmppath);
 
+	if (fileName.indexOf('..') > -1) {
+		return res.sendStatus(400);
+	}
+
 	const publicPath: string = `${fileId}/${fileName}`;
 	const privatePath: string = `${config.storagePath}/${publicPath}`;
 	mkdirp(path.dirname(privatePath), (mkdirErr: any) => {
