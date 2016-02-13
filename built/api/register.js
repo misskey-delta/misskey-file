@@ -20,6 +20,9 @@ module.exports = function (req, res) {
     var fileName = file.originalname;
     var fileBuffer = fs.readFileSync(tmppath);
     fs.unlink(tmppath);
+    if (fileName.indexOf('..') > -1) {
+        return res.sendStatus(400);
+    }
     var publicPath = fileId + '/' + fileName;
     var privatePath = config_1.default.storagePath + '/' + publicPath;
     mkdirp(path.dirname(privatePath), function (mkdirErr) {
