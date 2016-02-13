@@ -10,8 +10,11 @@ module.exports = (req: express.Request, res: express.Response) => {
 		if (path.indexOf('..') > -1) {
 			return res.sendStatus(400);
 		}
-		console.log('DELETE: ' + `${config.storagePath}/${path}/../`);
-		rmrf(`${config.storagePath}/${path}/../`, {
+		const a = path.split('/');
+		a.pop()
+		const resolvedPath = `${config.storagePath}/${a.join('/')}`;
+		console.log(`DELETE: ${resolvedPath}`);
+		rmrf(resolvedPath, {
 			disableGlob: true
 		}, (err: any) => {
 			if (err !== null) {
