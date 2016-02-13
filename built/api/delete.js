@@ -15,7 +15,7 @@ module.exports = function (req, res) {
 function deleteFolderRecursive(path) {
     if (fs.existsSync(path)) {
         fs.readdirSync(path).forEach(function (file) {
-            var curPath = path + "/" + file;
+            var curPath = path + '/' + file;
             if (fs.statSync(curPath).isDirectory()) {
                 deleteFolderRecursive(curPath);
             } else {
