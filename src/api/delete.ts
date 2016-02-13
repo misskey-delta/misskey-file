@@ -15,9 +15,9 @@ module.exports = (req: express.Request, res: express.Response) => {
 
 function deleteFolderRecursive(path: string): void {
 	if (fs.existsSync(path)) {
-		fs.readdirSync(path).forEach(function(file) {
-			var curPath = path + "/" + file;
-			if(fs.statSync(curPath).isDirectory()) { // recurse
+		fs.readdirSync(path).forEach((file) => {
+			const curPath = `${path}/${file}`;
+			if (fs.statSync(curPath).isDirectory()) { // recurse
 				deleteFolderRecursive(curPath);
 			} else { // delete file
 				fs.unlinkSync(curPath);
