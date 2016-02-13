@@ -6,6 +6,9 @@ module.exports = (req: express.Request, res: express.Response) => {
 	const passkey: string = req.body['passkey'];
 	if (passkey === config.passkey) {
 		const path: string = req.body['path'];
+		if (path.indexOf('..') > -1) {
+			return res.sendStatus(400);
+		}
 		deleteFolderRecursive(`${config.storagePath}/${path}/../`);
 		res.sendStatus(200);
 	} else {
