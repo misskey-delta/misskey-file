@@ -34,58 +34,68 @@ app.get('/', (req, res) => {
 
 app.get('*', (req, res) => {
 	const path = decodeURI(req.path);
-	let g: any = null;
+	const filePath = `${config.storagePath}/${path}`;
 
-	if (path.indexOf('..') !== -1) {
-		return res.status(400).send('invalid path');
-	}
+	fs.stat(filePath, (err, stat) => {
+		if (err === null) {
+			let g: any = null;
 
-	if (req.query.download !== undefined) {
-		res.header('Content-Disposition', 'attachment');
-		res.sendFile(`${config.storagePath}/${path}`);
-		return;
-	}
+			if (path.indexOf('..') !== -1) {
+				return res.status(400).send('invalid path');
+			}
 
-	if (req.query.thumbnail !== undefined) {
-		gm(`${config.storagePath}/${path}`)
-		.resize(150, 150)
-		.compress('jpeg')
-		.quality('80')
-		.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
-			res.header('Content-Type', 'image/jpeg');
-			res.send(thumbnail);
-		});
-		return;
-	}
-
-	if (req.query.size !== undefined) {
-		if (g === null) {
-			g = gm(`${config.storagePath}/${path}`);
-		}
-		g = g.resize(req.query.size, req.query.size);
-	}
-
-	if (req.query.quality !== undefined) {
-		if (g === null) {
-			g = gm(`${config.storagePath}/${path}`);
-		}
-		g = g.compress('jpeg')
-			.quality(req.query.quality);
-	}
-
-	if (g !== null) {
-		g.toBuffer('jpeg', (err: Error, img: Buffer) => {
-			if (err !== undefined && err !== null) {
-				console.error(err);
-				res.status(500).send(err);
+			if (req.query.download !== undefined) {
+				res.header('Content-Disposition', 'attachment');
+				res.sendFile(`${config.storagePath}/${path}`);
 				return;
 			}
-			res.header('Content-Type', 'image/jpeg');
-			res.send(img);
-		});
-	} else {
-		res.sendFile(`${config.storagePath}/${path}`);
-	}
+
+			if (req.query.thumbnail !== undefined) {
+				gm(filePath)
+				.resize(150, 150)
+				.compress('jpeg')
+				.quality('80')
+				.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
+					res.header('Content-Type', 'image/jpeg');
+					res.send(thumbnail);
+				});
+				return;
+			}
+
+			if (req.query.size !== undefined) {
+				if (g === null) {
+					g = gm(`${config.storagePath}/${path}`);
+				}
+				g = g.resize(req.query.size, req.query.size);
+			}
+
+			if (req.query.quality !== undefined) {
+				if (g === null) {
+					g = gm(`${config.storagePath}/${path}`);
+				}
+				g = g.compress('jpeg')
+					.quality(req.query.quality);
+			}
+
+			if (g !== null) {
+				g.toBuffer('jpeg', (err: Error, img: Buffer) => {
+					if (err !== undefined && err !== null) {
+						console.error(err);
+						res.status(500).send(err);
+						return;
+					}
+					res.header('Content-Type', 'image/jpeg');
+					res.send(img);
+				});
+			} else {
+				res.sendFile(filePath);
+			}
+		} else if (err.code === 'ENOENT') {
+			res.status(404).sendFile(__dirname + '/images/not-found.png');
+		} else {
+			res.sendStatus(500);
+		}
+	});
 });
 
 let server: http.Server | https.Server;
