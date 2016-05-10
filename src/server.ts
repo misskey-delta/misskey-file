@@ -7,12 +7,12 @@ import * as bodyParser from 'body-parser';
 const gm: any = require('gm');
 import config from './config';
 
-const app: express.Express = express();
+const app = express();
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // CORS middleware
-app.use((req: express.Request, res: express.Response, next: () => void) => {
+app.use((req, res, next) => {
 	res.set({
 		'Access-Control-Allow-Origin': '*',
 		'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-	const path: string = decodeURI(req.path);
+	const path = decodeURI(req.path);
 	let g: any = null;
 
 	if (path.indexOf('..') !== -1) {
@@ -64,7 +64,7 @@ app.get('*', (req, res) => {
 		}
 		g = g.resize(req.query.size, req.query.size);
 	}
-	
+
 	if (req.query.quality !== undefined) {
 		if (g === null) {
 			g = gm(`${config.storagePath}/${path}`);
@@ -72,7 +72,7 @@ app.get('*', (req, res) => {
 		g = g.compress('jpeg')
 			.quality(req.query.quality);
 	}
-	
+
 	if (g !== null) {
 		g.toBuffer('jpeg', (err: Error, img: Buffer) => {
 			if (err !== undefined && err !== null) {
@@ -110,8 +110,8 @@ if (config.https.enable) {
 }
 
 server.listen(port, () => {
-	const listenhost: string = server.address().address;
-	const listenport: number = server.address().port;
+	const listenhost = server.address().address;
+	const listenport = server.address().port;
 
 	console.log(
 		`\u001b[1;32m${cluster.worker.id} is now listening at ${listenhost}:${listenport}\u001b[0m`);

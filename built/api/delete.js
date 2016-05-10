@@ -1,28 +1,28 @@
-'use strict';
-
-var config_1 = require('../config');
-var rmrf = require('rimraf');
-module.exports = function (req, res) {
-    var passkey = req.body['passkey'];
+"use strict";
+const config_1 = require('../config');
+const rmrf = require('rimraf');
+module.exports = (req, res) => {
+    const passkey = req.body['passkey'];
     if (passkey === config_1.default.passkey) {
-        var path = req.body['path'];
+        const path = req.body['path'];
         if (path.indexOf('..') > -1) {
             return res.sendStatus(400);
         }
-        var a = path.split('/');
+        const a = path.split('/');
         a.pop();
-        var resolvedPath = config_1.default.storagePath + '/' + a.join('/');
-        console.log('DELETE: ' + resolvedPath);
+        const resolvedPath = `${config_1.default.storagePath}/${a.join('/')}`;
+        console.log(`DELETE: ${resolvedPath}`);
         rmrf(resolvedPath, {
             disableGlob: true
-        }, function (err) {
+        }, (err) => {
             if (err !== null) {
                 console.error(err);
                 return res.sendStatus(500);
             }
             res.sendStatus(200);
         });
-    } else {
+    }
+    else {
         res.sendStatus(400);
     }
 };

@@ -18,24 +18,24 @@ module.exports = (req: express.Request, res: express.Response) => {
 		return res.sendStatus(400);
 	}
 
-	const fileId: string = req.body['file-id'];
-	const tmppath: string = file.path;
-	const fileName: string = file.originalname;
-	const fileBuffer: Buffer = fs.readFileSync(tmppath);
+	const fileId = req.body['file-id'];
+	const tmppath = file.path;
+	const fileName = file.originalname;
+	const fileBuffer = fs.readFileSync(tmppath);
 	fs.unlink(tmppath);
 
 	if (fileName.indexOf('..') > -1) {
 		return res.sendStatus(400);
 	}
 
-	const publicPath: string = `${fileId}/${fileName}`;
-	const privatePath: string = `${config.storagePath}/${publicPath}`;
-	mkdirp(path.dirname(privatePath), (mkdirErr: any) => {
+	const publicPath = `${fileId}/${fileName}`;
+	const privatePath = `${config.storagePath}/${publicPath}`;
+	mkdirp(path.dirname(privatePath), mkdirErr => {
 		if (mkdirErr !== null) {
 			console.error(mkdirErr);
 			return res.sendStatus(500);
 		}
-		fs.writeFile(privatePath, fileBuffer, (writeFileErr: NodeJS.ErrnoException) => {
+		fs.writeFile(privatePath, fileBuffer, writeFileErr => {
 			if (writeFileErr !== null) {
 				console.error(writeFileErr);
 				return res.sendStatus(500);

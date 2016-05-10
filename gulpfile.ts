@@ -3,7 +3,6 @@
 import { task, src, dest, watch } from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as tslint from 'gulp-tslint';
-const babel = require('gulp-babel');
 
 const tsProject = ts.createProject('tsconfig.json', <any>{
 	typescript: require('typescript')
@@ -18,7 +17,6 @@ task('build', ['build:ts']);
 task('build:ts', () => {
 	return tsProject.src()
 		.pipe(ts(tsProject))
-		.pipe(babel())
 		.pipe(dest('./built'));
 });
 

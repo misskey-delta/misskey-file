@@ -13,26 +13,23 @@
     }
   },
   "dependencies": {
-    "express/express.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
-    },
     "mkdirp/mkdirp.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
+      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
     },
     "multer/multer.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
+      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
+      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
     },
     "gulp/gulp.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
+      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
+      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "138ad74b9e8e6c08af7633964962835add4c91e2"
+      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
     }
   }
 }

@@ -4,7 +4,7 @@ if (cluster.isMaster) {
 	console.log('Welcome to Misskey File');
 
 	// Count the machine's CPUs
-	const cpuCount: number = require('os').cpus().length;
+	const cpuCount = require('os').cpus().length;
 
 	// Create a worker for each CPU
 	for (var i = 0; i < cpuCount; i++) {

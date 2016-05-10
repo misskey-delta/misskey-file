@@ -12,3 +12,4 @@
 /// <reference path="gulp-tslint/gulp-tslint.d.ts" />
 /// <reference path="vinyl/vinyl.d.ts" />
 /// <reference path="../node_modules/tslint/lib/tslint.d.ts" />
+/// <reference path="express-serve-static-core/express-serve-static-core.d.ts" />

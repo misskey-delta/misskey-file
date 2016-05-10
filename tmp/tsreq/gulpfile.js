@@ -1,8 +1,8 @@
 /// <reference path="./typings/bundle.d.ts" />
+"use strict";
 var gulp_1 = require('gulp');
 var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
-var babel = require('gulp-babel');
 var tsProject = ts.createProject('tsconfig.json', {
     typescript: require('typescript')
 });
@@ -13,7 +13,6 @@ gulp_1.task('build', ['build:ts']);
 gulp_1.task('build:ts', function () {
     return tsProject.src()
         .pipe(ts(tsProject))
-        .pipe(babel())
         .pipe(gulp_1.dest('./built'));
 });
 gulp_1.task('lint', function () {
