@@ -4,6 +4,8 @@ import * as https from 'https';
 import * as cluster from 'cluster';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+const mmm = require('mmmagic');
+const magic = new mmm.Magic(mmm.MAGIC_MIME_TYPE);
 const gm: any = require('gm');
 import config from './config';
 
@@ -88,6 +90,10 @@ app.get('*', (req, res) => {
 					res.send(img);
 				});
 			} else {
+				magic.detectFile(filePath, function(err, result) {
+					if (err) throw err;
+					res.header('Content-Type', result);
+				});
 				res.sendFile(filePath);
 			}
 		} else if (err.code === 'ENOENT') {
