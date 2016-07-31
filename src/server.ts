@@ -92,9 +92,12 @@ app.get('*', (req, res) => {
 			} else {
 				magic.detectFile(filePath, function(err, result) {
 					if (err) throw err;
-					res.header('Content-Type', result);
+					if (result !== null) {
+						res.header('Content-Type', result).sendFile(filePath);
+					} else {
+						sendFile(filePath);
+					};
 				});
-				res.sendFile(filePath);
 			}
 		} else if (err.code === 'ENOENT') {
 			res.status(404).sendFile(__dirname + '/images/not-found.png');
