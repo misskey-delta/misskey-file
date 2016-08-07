@@ -2,8 +2,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as express from 'express';
 import * as mkdirp from 'mkdirp';
-const fileType = require('file-type');
-const gm: any = require('gm');
 
 import config from '../config';
 

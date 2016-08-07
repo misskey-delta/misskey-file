@@ -30,7 +30,6 @@
     "mmmagic": "0.4.4",
     "body-parser": "1.15.1",
     "express": "4.13.4",
-    "file-type": "3.8.0",
     "gm": "1.22.0",
     "mkdirp": "0.5.1",
     "multer": "1.1.0",

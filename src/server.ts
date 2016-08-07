@@ -90,13 +90,15 @@ app.get('*', (req, res) => {
 					res.send(img);
 				});
 			} else {
-				magic.detectFile(filePath, function(err, result) {
-					if (err) throw err;
+				magic.detectFile(filePath, (err: string, result: string) => {
+					if (err) {
+						throw err;
+					}
 					if (result !== null) {
 						res.header('Content-Type', result).sendFile(filePath);
 					} else {
-						sendFile(filePath);
-					};
+						res.sendFile(filePath);
+					}
 				});
 			}
 		} else if (err.code === 'ENOENT') {
