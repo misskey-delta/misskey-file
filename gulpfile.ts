@@ -31,9 +31,10 @@ task('build:copy', () => {
 task('lint', () => {
 	return src('./src/**/*.ts')
 		.pipe(tslint(<any>{
-			tslint: require('tslint')
+			tslint: require('tslint'),
+			fotmatter: "verbose"
 		}))
-		.pipe(tslint.report('verbose'));
+		.pipe(tslint.report());
 });
 
 task('test', ['build', 'lint']);

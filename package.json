@@ -20,9 +20,9 @@
     "gulp": "3.9.1",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.1.0",
-    "gulp-tslint": "5.0.0",
-    "gulp-typescript": "2.13.4",
-    "tslint": "3.9.0",
+    "gulp-tslint": "6.0.2",
+    "gulp-typescript": "2.13.6",
+    "tslint": "3.14.0",
     "typescript": "1.8.10",
     "typescript-require": "0.2.9"
   },
