@@ -27,13 +27,13 @@
     "typescript-require": "0.2.9"
   },
   "dependencies": {
-    "body-parser": "1.15.1",
-    "express": "4.13.4",
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
     "file-type": "3.8.0",
-    "gm": "1.22.0",
+    "gm": "1.23.0",
     "mkdirp": "0.5.1",
-    "multer": "1.1.0",
-    "rimraf": "^2.5.1"
+    "multer": "1.2.0",
+    "rimraf": "2.5.4"
   },
   "private": true
 }
