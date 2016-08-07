@@ -4,8 +4,7 @@ import * as https from 'https';
 import * as cluster from 'cluster';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-const mmm = require('mmmagic');
-const magic = new mmm.Magic(mmm.MAGIC_MIME_TYPE);
+const fileType = require('file-type');
 const gm: any = require('gm');
 import config from './config';
 
@@ -90,14 +89,17 @@ app.get('*', (req, res) => {
 					res.send(img);
 				});
 			} else {
-				magic.detectFile(filePath, (err: string, result: string) => {
-					if (err) {
-						throw err;
+				fs.readFile(filePath, (err: Error, file: Buffer) => {
+					if (err !== undefined && err !== null ) {
+						console.error(err);
+						res.status(500).send(err);
+						return;
 					}
-					if (result !== null) {
-						res.header('Content-Type', result).sendFile(filePath);
+					const fileMIME = fileType(file).mime;
+					if (fileMIME !== null) {
+						res.header('Content-Type', fileMIME).send(file);
 					} else {
-						res.sendFile(filePath);
+						res.send(file);
 					}
 				});
 			}
