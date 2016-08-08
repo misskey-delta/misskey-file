@@ -14,22 +14,22 @@
   },
   "dependencies": {
     "mkdirp/mkdirp.d.ts": {
-      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
+      "ref": "ea75b2124839a81ade996a2f55a2906c257938eb"
     },
     "multer/multer.d.ts": {
-      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
+      "ref": "ea75b2124839a81ade996a2f55a2906c257938eb"
     },
     "body-parser/body-parser.d.ts": {
-      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
+      "ref": "ea75b2124839a81ade996a2f55a2906c257938eb"
     },
     "gulp/gulp.d.ts": {
-      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
+      "ref": "ea75b2124839a81ade996a2f55a2906c257938eb"
     },
     "gulp-typescript/gulp-typescript.d.ts": {
-      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
+      "ref": "ea75b2124839a81ade996a2f55a2906c257938eb"
     },
     "gulp-tslint/gulp-tslint.d.ts": {
-      "ref": "6052959591c9bc6f8463c58220965c7030ba934d"
+      "ref": "ea75b2124839a81ade996a2f55a2906c257938eb"
     }
   }
 }
