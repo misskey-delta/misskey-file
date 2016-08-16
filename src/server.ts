@@ -95,10 +95,11 @@ app.get('*', (req, res) => {
 						res.status(500).send(err);
 						return;
 					}
-					const fileMIME = fileType(file).mime;
-					if (fileMIME !== null) {
+					try {
+						const fileMIME = fileType(file).mime;
 						res.header('Content-Type', fileMIME).send(file);
-					} else {
+					} catch (err) {
+						console.log(err);
 						res.send(file);
 					}
 				});
