@@ -4,7 +4,7 @@
   "description": "Misskey File",
   "main": "./built/index.js",
   "repository": {
-    "url": "https://github.com/sagume/Misskey-File.git"
+    "url": "https://github.com/misskey-delta/Misskey-File.git"
   },
   "scripts": {
     "start": "node ./built/index.js",
