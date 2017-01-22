@@ -16,7 +16,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "dtsm": "1.1.0",
     "gulp": "3.9.1",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.1.0",
