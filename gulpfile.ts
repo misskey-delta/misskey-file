@@ -1,10 +1,8 @@
-/// <reference path="./typings/bundle.d.ts" />
-
 import { task, src, dest, watch } from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as tslint from 'gulp-tslint';
 
-const tsProject = ts.createProject('tsconfig.json', <any>{
+const tsProject = ts.createProject('tsconfig.json', {
 	typescript: require('typescript')
 });
 
@@ -30,7 +28,7 @@ task('build:copy', () => {
 
 task('lint', () => {
 	return src('./src/**/*.ts')
-		.pipe(tslint(<any>{
+		.pipe(tslint({
 			tslint: require('tslint'),
 			fotmatter: "verbose"
 		}))
