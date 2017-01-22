@@ -15,8 +15,7 @@ This is Misskey file server.
 1. `git clone git://github.com/misskey-delta/Misskey-File.git`
 2. `cd Misskey-File`
 3. `npm install`
-4. `npm run dtsm`
-5. `npm run build`
+4. `npm run build`
 
 ## Contribution
 We welcome your contributions.

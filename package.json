@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "node ./built/index.js",
-    "dtsm": "dtsm --insight false install",
     "build": "gulp build",
     "watch": "gulp watch",
     "lint": "gulp lint",
