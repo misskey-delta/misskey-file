@@ -27,6 +27,12 @@
     "typescript-require": "0.2.9-1"
   },
   "dependencies": {
+    "@types/body-parser": "0.0.33",
+    "@types/gulp": "^3.8.32",
+    "@types/gulp-tslint": "^3.6.30",
+    "@types/gulp-typescript": "0.0.32",
+    "@types/mkdirp": "^0.3.29",
+    "@types/multer": "0.0.32",
     "body-parser": "1.15.2",
     "express": "4.14.0",
     "file-type": "3.8.0",
