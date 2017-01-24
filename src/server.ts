@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-	res.send('Misskeyにアップロードされたファイルを保管・配信するサーバーです。https://misskey.xyz');
+	res.send('this server deliveries files uploaded with misskey service.');
 });
 
 app.get('*', (req, res) => {
