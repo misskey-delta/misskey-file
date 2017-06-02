@@ -29,7 +29,7 @@
     "@types/gulp-tslint": "^3.6.30",
     "@types/gulp-typescript": "2.13.0",
     "@types/mkdirp": "^0.3.29",
-    "@types/multer": "0.0.33",
+    "@types/multer": "0.0.34",
     "body-parser": "1.17.1",
     "express": "4.15.2",
     "file-type": "4.3.0",
