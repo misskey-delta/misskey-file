@@ -18,10 +18,10 @@
     "gulp": "3.9.1",
     "gulp-notify": "3.0.0",
     "gulp-plumber": "1.1.0",
-    "gulp-tslint": "8.0.0",
+    "gulp-tslint": "8.1.1",
     "gulp-typescript": "3.1.6",
     "tslint": "5.2.0",
-    "typescript": "2.3.2"
+    "typescript": "2.3.4"
   },
   "dependencies": {
     "@types/body-parser": "1.16.3",
@@ -30,7 +30,7 @@
     "@types/gulp-typescript": "2.13.0",
     "@types/mkdirp": "^0.3.29",
     "@types/multer": "0.0.34",
-    "body-parser": "1.17.1",
+    "body-parser": "1.17.2",
     "express": "4.15.2",
     "file-type": "4.3.0",
     "gm": "1.23.0",
