@@ -20,7 +20,7 @@ module.exports = (req: express.Request, res: express.Response) => {
 	const tmppath = file.path;
 	const fileName = file.originalname;
 	const fileBuffer = fs.readFileSync(tmppath);
-	fs.unlink(tmppath);
+	fs.unlink(tmppath, (e) => e !== null && console.dir(e));
 
 	if (fileName.indexOf('..') > -1) {
 		return res.sendStatus(400);
