@@ -53,6 +53,7 @@ app.get('*', (req, res) => {
 
 			if (req.query.thumbnail !== undefined) {
 				gm(filePath)
+				.autoOrient()
 				.resize(150, 150)
 				.compress('jpeg')
 				.quality('80')
