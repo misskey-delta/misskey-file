@@ -66,14 +66,14 @@ app.get('*', (req, res) => {
 
 			if (req.query.size !== undefined) {
 				if (g === null) {
-					g = gm(`${config.storagePath}/${path}`);
+					g = gm(`${config.storagePath}/${path}`).autoOrient();
 				}
 				g = g.resize(req.query.size, req.query.size);
 			}
 
 			if (req.query.quality !== undefined) {
 				if (g === null) {
-					g = gm(`${config.storagePath}/${path}`);
+					g = gm(`${config.storagePath}/${path}`).autoOrient();
 				}
 				g = g.compress('jpeg')
 					.quality(req.query.quality);
