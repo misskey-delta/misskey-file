@@ -55,6 +55,7 @@ app.get('*', (req, res) => {
 				gm(filePath)
 				.autoOrient()
 				.resize(150, 150)
+				.transparent('white')
 				.compress('jpeg')
 				.quality('80')
 				.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
@@ -68,7 +69,7 @@ app.get('*', (req, res) => {
 				if (g === null) {
 					g = gm(`${config.storagePath}/${path}`).autoOrient();
 				}
-				g = g.resize(req.query.size, req.query.size);
+				g = g.transparent('white').resize(req.query.size, req.query.size);
 			}
 
 			if (req.query.quality !== undefined) {
