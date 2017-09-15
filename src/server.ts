@@ -55,6 +55,7 @@ app.get('*', (req, res) => {
 				gm(filePath)
 				.autoOrient()
 				.resize(150, 150)
+				.flatten()
 				.compress('jpeg')
 				.quality('80')
 				.toBuffer('jpeg', (genThumbnailErr: Error, thumbnail: Buffer) => {
@@ -80,7 +81,7 @@ app.get('*', (req, res) => {
 			}
 
 			if (g !== null) {
-				g.toBuffer('jpeg', (err: Error, img: Buffer) => {
+				g.flatten().toBuffer('jpeg', (err: Error, img: Buffer) => {
 					if (err !== undefined && err !== null) {
 						console.error(err);
 						res.status(500).send(err);
