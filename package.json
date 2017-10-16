@@ -24,7 +24,7 @@
   "dependencies": {
     "body-parser": "1.18.2",
     "express": "4.16.1",
-    "file-type": "6.2.0",
+    "file-type": "7.1.0",
     "gm": "1.23.0",
     "mkdirp": "0.5.1",
     "multer": "1.3.0",
